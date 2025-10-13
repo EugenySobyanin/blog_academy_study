@@ -1,0 +1,17 @@
+.border {
+    border: 1px solid white;
+}
+
+body {
+    margin: 0;
+    background-color: #2a323b;
+}
+
+.main-div {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 30%;
+}

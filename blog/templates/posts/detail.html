@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card">
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.text }}</p>
+    <p>{{ post.created_at }}</p>
+    <p>{{ post.updated_at }}</p>
+  </div>
+{% endblock %}
