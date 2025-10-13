@@ -10,3 +10,6 @@ def posts(request: HttpRequest) -> HttpResponse:
 
 def login(request: HttpRequest) -> HttpResponse:
     return HttpResponse('login')
+
+def create(request: HttpRequest) -> HttpResponse:
+    return HttpResponse('create')
