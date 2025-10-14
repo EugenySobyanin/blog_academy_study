@@ -7,9 +7,23 @@
     </div>
     <nav class="header-nav">
       <ul class="header-ul">
-        <li>Публикации</li>
-        <li>Создать публикацию</li>
-        <li>Выйти</li>
+
+        <li class="nav-item">
+          <a class="nav-link my-link 
+          {% if request.resolver_match.url_name == '' %} activel {% endif %}" 
+          href="{% url 'posts:list' %}"> Публикации </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link my-link 
+          {% if request.resolver_match.url_name == 'add' %} activel {% endif %}" 
+          href="{% url 'posts:add' %}"> Создать публикацию </a>
+        </li>
+
+        <li class="nav-item">
+          Выйти
+        </li>
+
       </ul>
     </nav>
   </div>
