@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="list-block">
+    <div class="container">
+      {% for post in page_obj %}
+        <div class="card main-font">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.text }}</p>
+          <p>Создан: {{ post.created_at }}</p>
+          <p>Обновлен: {{ post.updated_at }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

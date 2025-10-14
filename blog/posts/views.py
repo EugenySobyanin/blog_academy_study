@@ -1,13 +1,18 @@
+from django.core.paginator import Paginator
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 
+from .constants import POSTS_PAGINATE_COUNT
 from .forms import PostForm
 from .models import Post
 
 
 def list(request: HttpRequest) -> HttpResponse:
     posts = Post.objects.all()
-    context = {'posts': posts}
+    paginator = Paginator(posts, POSTS_PAGINATE_COUNT)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {'page_obj': page_obj}
     return render(request, 'posts/list.html', context=context)
 
 def detail(request: HttpRequest, post_id: int) -> HttpResponse:
@@ -29,5 +34,9 @@ def create(request: HttpRequest) -> HttpResponse:
         form = PostForm(request.POST)
         if form.is_valid():
             form.save()
-            return 
-        return render(request, 'posts/create.html')
+            return redirect('posts:detail', form.instance.pk)
+        return render(request, 'posts/form.html')
+    elif request.method == 'GET':
+        form = PostForm()
+        context = {'form': form}
+        return render(request, 'posts/form.html', context=context)
