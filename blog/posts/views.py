@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .constants import POSTS_PAGINATE_COUNT
@@ -30,7 +30,10 @@ def create(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save(author=request.user)
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+
             return redirect('posts:detail', form.instance.pk)
         return render(request, 'posts/form.html')
     elif request.method == 'GET':
@@ -40,7 +43,15 @@ def create(request: HttpRequest) -> HttpResponse:
 
 def update(request: HttpRequest, post_id: int) -> HttpResponse:
     post = get_object_or_404(Post, pk=post_id)
-    form = PostForm(instance=post, data=request.POST or None)
+
+    if post.author != request.user:
+        return HttpResponseForbidden("У вас нет прав для редактирования этого поста")
+
+    form = PostForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=post
+    )
     if request.method == 'POST':
         if form.is_valid():
             form.save()
