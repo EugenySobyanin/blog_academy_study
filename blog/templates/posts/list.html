@@ -1,11 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
       {% for post in page_obj %}
-        <div class="card main-font">
-          <h3>{{ post.title }}</h3>
-          <p>{{ post.text }}</p>
+        <div class="card main-font card-border background-black">
+          <h3 class="text-color">
+            <a class="title-link" href="{% url 'posts:detail' post_id=post.pk %}">
+              {{ post.title }}
+            </a>
+          </h3>
+
+          {% if post.image %}
+            <img src="{{ post.image.url }}" alt="{{ post.title }}" class="image-container">
+          {% endif %}
+
+          <p class="post-text">{{ post.text }}</p>
           <small>
-            <p>Создан: {{ post.created_at|date:"d.m.Y H:i" }}<br>
+            <p class="text-gray"> Создан: {{ post.created_at|date:"d.m.Y H:i" }}<br>
               {% if post.created_at != post.updated_at %}
               Обновлен: {{ post.updated_at|date:"d.m.Y H:i" }}
               {% endif %}

@@ -1,0 +1,35 @@
+/*Текст*/
+
+.text-white {
+    color: #F5FFFA;
+}
+
+.text-gray {
+    color: #546575;
+}
+
+.text-color {
+    color: #7FC7FF;
+}
+
+
+/*Фон*/
+
+.background-black {
+    background-color: #151719;
+}
+
+.background-gray {
+    background-color: #2a323b;
+}
+
+
+/*Бордеры*/
+
+.header-border {
+    border: 1px solid #546575;
+}
+
+.card-border {
+    border: 2px solid #546575;
+}

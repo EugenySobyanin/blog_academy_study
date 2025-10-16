@@ -8,7 +8,7 @@
     {% endif %}
     публикацию
   </h2>
-  <form class="post-form main-font border" method="post">
+  <form class="post-form main-font border" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% comment %} {% include "includes/errors.html" %} {% endcomment %}
       {% for field in form %}

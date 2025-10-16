@@ -1,8 +1,11 @@
 <header>
-  <div class="main-header-div header-border">
+  <div class="main-header-div header-border background-black text-white">
     <div class="title-div">
       <h2>БЛОГ</h2>
-      <span>Имя Фамилия</span>
+
+      {% if user.is_authenticated %}
+        <span> {{ user.username }} </span>
+      {% endif %}
 
     </div>
     <nav class="header-nav">
@@ -19,10 +22,16 @@
           {% if request.resolver_match.url_name == 'add' %} activel {% endif %}" 
           href="{% url 'posts:add' %}"> Создать публикацию </a>
         </li>
-
-        <li class="nav-item">
-          Выйти
-        </li>
+        
+        {% if user.is_authenticated %}
+          <li>
+            <a href="{% url 'users:login'%}"> Выйти </a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{% url 'users:login'%}"> Войти </a>
+          </li>
+        {% endif %}
 
       </ul>
     </nav>

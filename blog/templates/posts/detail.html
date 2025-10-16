@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="card main-font">
-    <h3>{{ post.title }}</h3>
-    <p>{{ post.text }}</p>
-    <p>Создан: {{ post.created_at }}</p>
-    <p>Обновлен: {{ post.updated_at }}</p>
+  <div class="card main-font card-border background-black">
+    <h3 class="text-color">{{ post.title }}</h3>
+      {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="image-container">
+      {% endif %}
+    <p class="post-text">{{ post.text }}</p>
+    <small>
+      <p class="text-gray"> Создан: {{ post.created_at|date:"d.m.Y H:i" }}<br>
+        {% if post.created_at != post.updated_at %}
+        Обновлен: {{ post.updated_at|date:"d.m.Y H:i" }}
+        {% endif %}
+      </p>
+    </small>
   </div>
 {% endblock %}

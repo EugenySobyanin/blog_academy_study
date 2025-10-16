@@ -26,17 +26,24 @@ def about(request: HttpRequest) -> HttpResponse:
 def posts(request: HttpRequest) -> HttpResponse:
     return HttpResponse('posts')
 
-def login(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('login')
-
 def create(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            form.save(author=request.user)
             return redirect('posts:detail', form.instance.pk)
         return render(request, 'posts/form.html')
     elif request.method == 'GET':
         form = PostForm()
         context = {'form': form}
         return render(request, 'posts/form.html', context=context)
+
+def update(request: HttpRequest, post_id: int) -> HttpResponse:
+    post = get_object_or_404(Post, pk=post_id)
+    form = PostForm(instance=post, data=request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('posts:detail', form.instance.pk)
+    else:
+        return render(request, 'posts/form.html', {'form': form})

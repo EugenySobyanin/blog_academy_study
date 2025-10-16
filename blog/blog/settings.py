@@ -99,3 +99,22 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.User'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# URL для перенаправления при необходимости логина
+LOGIN_URL = '/accounts/login/'
+
+# URL для перенаправления после успешного логина
+LOGIN_REDIRECT_URL = '/'
+
+# URL для перенаправления после логаута
+LOGOUT_REDIRECT_URL = '/'
+
+# Время жизни сессии (в секундах)
+SESSION_COOKIE_AGE = 2_419_200  # 2 недели по умолчанию
+
+# Закрывать браузер - сессия заканчивается
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
