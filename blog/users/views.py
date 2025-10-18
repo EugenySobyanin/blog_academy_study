@@ -21,10 +21,12 @@ def login_view(request):
         form = AuthenticationForm()
 
     return render(request, 'auth/login.html', {'form': form})
-    
+
+
 def logout_view(request):
     logout(request)  # Удаляет сессию
     return redirect('posts:list')
+
 
 def registration_view(request):
     if request.method == 'POST':
@@ -35,5 +37,5 @@ def registration_view(request):
             return redirect('home')
     else:
         form = RegisterForm()
-    
+
     return render(request, 'auth/register.html', {'form': form})

@@ -105,16 +105,16 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # URL для перенаправления при необходимости логина
-LOGIN_URL = '/accounts/login/'
+LOGIN_URL = '/auth/login/'
 
 # URL для перенаправления после успешного логина
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/posts/'
 
 # URL для перенаправления после логаута
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/posts/'
 
 # Время жизни сессии (в секундах)
 SESSION_COOKIE_AGE = 2_419_200  # 2 недели по умолчанию
 
 # Закрывать браузер - сессия заканчивается
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = False
