@@ -63,3 +63,15 @@ small p {
     max-width: 100%;
     overflow: hidden;
 }
+
+.avatar-post {
+    border-radius: 50%;
+    height: 10%;
+    width: 10%;
+}
+
+.avatar-comment {
+    border-radius: 50%;
+    height: 10%;
+    width: 10%;
+}

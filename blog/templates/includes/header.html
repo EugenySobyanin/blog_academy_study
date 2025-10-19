@@ -1,13 +1,20 @@
 <header>
   <div class="main-header-div header-border background-black text-white">
+
     <div class="title-div">
-      <h2>БЛОГ</h2>
+      <h2 class="text-white">БЛОГ</h2>
 
       {% if user.is_authenticated %}
-        <span> {{ user.username }} </span>
-      {% endif %}
+        <a href="{% url 'posts:my_profile' %}">
+          <img src="{{ user.avatar.url }}" class="avatar-header">
+        </a>
 
+        <a href="{% url 'posts:my_profile' %}">
+          <span> {{ user.username }} </span>
+        </a>
+      {% endif %}
     </div>
+
     <nav class="header-nav">
       <ul class="header-ul">
 
@@ -17,13 +24,13 @@
           href="{% url 'posts:list' %}"> Публикации </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link my-link 
-          {% if request.resolver_match.url_name == 'add' %} activel {% endif %}" 
-          href="{% url 'posts:add' %}"> Создать публикацию </a>
-        </li>
-        
         {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link my-link 
+            {% if request.resolver_match.url_name == 'add' %} activel {% endif %}" 
+            href="{% url 'posts:add' %}"> Создать публикацию </a>
+          </li>
+
           <li>
             <a href="{% url 'users:login'%}"> Выйти </a>
           </li>

@@ -1,11 +1,19 @@
 from django import forms
 
-from .models import Post
+from .models import Comment, Post
 
 
 class PostForm(forms.ModelForm):
-    """Форма связанная с моделью Post."""
+    """Форма для создания публикаций."""
 
     class Meta:
         model = Post
         fields = ('title', 'text', 'image')
+
+
+class CommentForm(forms.ModelForm):
+    """Форма для создания комментраиев."""
+
+    class Meta:
+        model = Comment
+        fields = ('text',)

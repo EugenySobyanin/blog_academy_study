@@ -1,26 +1,51 @@
+from typing import Union
+
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Count, Prefetch
 from django.http import HttpRequest, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .constants import POSTS_PAGINATE_COUNT
-from .forms import PostForm
-from .models import Post
+from .forms import CommentForm, PostForm
+from .models import Comment, Post
 
 
-def list(request: HttpRequest) -> HttpResponse:
+def post_list(request: HttpRequest) -> HttpResponse:
     """Получение списка всех публикаций."""
-    posts = Post.objects.all()
+    posts = Post.objects.annotate(
+        comments_count=Count('comments')
+    ).select_related('author')
     paginator = Paginator(posts, POSTS_PAGINATE_COUNT)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'posts/list.html', {'page_obj': page_obj})
+    context = {
+        'page_obj': page_obj,
+        'is_paginated': page_obj.has_other_pages()
+    }
+    return render(request, 'posts/list.html', context=context)
 
-def detail(request: HttpRequest, post_id: int) -> HttpResponse:
+
+def post_detail(request: HttpRequest, post_id: int) -> HttpResponse:
     """Получение отдельной публикации."""
-    post = get_object_or_404(Post, pk=post_id)
-    return render(request, 'posts/detail.html', {'post': post})
+    post = get_object_or_404(
+        Post.objects
+        .select_related('author')
+        .prefetch_related(
+            Prefetch(
+                'comments',
+                queryset=Comment.objects.select_related('author')
+            )
+        ),
+        pk=post_id
+    )
+    form = CommentForm()
+    context = {'post': post, 'form': form}
+    return render(request, 'posts/detail.html', context=context)
 
-def create(request: HttpRequest) -> HttpResponse:
+
+@login_required
+def post_create(request: HttpRequest) -> HttpResponse:
     """Создание публикации."""
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -35,7 +60,9 @@ def create(request: HttpRequest) -> HttpResponse:
         context = {'form': form}
         return render(request, 'posts/form.html', context=context)
 
-def update(request: HttpRequest, post_id: int) -> HttpResponse:
+
+@login_required
+def post_update(request: HttpRequest, post_id: int) -> HttpResponse:
     """Обновление публикации."""
     post = get_object_or_404(Post, pk=post_id)
 
@@ -54,8 +81,34 @@ def update(request: HttpRequest, post_id: int) -> HttpResponse:
     else:
         return render(request, 'posts/form.html', {'form': form})
 
-def about(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('about')
 
-def posts(request: HttpRequest) -> HttpResponse:
-    return HttpResponse('posts')
+@login_required
+def post_delete(request: HttpRequest, post_id:int) -> HttpResponse:
+    return HttpResponse('Удаление поста.')
+
+
+@login_required
+def profile(request: HttpRequest, user_slug: Union[None, str] = None) -> HttpResponse:
+    """Получение всех публикаций текущего пользователя."""
+    if user_slug is None:
+        posts = Post.objects.filter(author=request.user)
+    else:
+        posts = Post.objects.filter(author__slug=user_slug)
+    paginator = Paginator(posts, POSTS_PAGINATE_COUNT)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(
+        request,
+        'posts/list.html',
+        {'page_obj': page_obj, 'is_paginated': page_obj.has_other_pages()}
+    )
+
+
+@login_required
+def comment_create(request: HttpRequest, ) -> HttpResponse:
+    pass
+
+
+@login_required
+def comment_delete(request: HttpRequest, ) -> HttpResponse:
+    pass

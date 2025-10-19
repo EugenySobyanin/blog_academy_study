@@ -34,7 +34,7 @@ def registration_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Автоматический вход после регистрации
-            return redirect('home')
+            return redirect('posts:list')
     else:
         form = RegisterForm()
 

@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -6,9 +8,12 @@ from .constants import MAX_LENGTH_POST
 
 User = get_user_model()
 
+
 def post_image_path(instance, filename):
-    # posts/image.jpg_123
-    return f'posts/{filename}{instance.id}'
+    ext = filename.split('.')[-1]
+    # Генерация уникального имени
+    filename = f'{uuid.uuid4()}.{ext}'
+    return f'posts/{filename}'
 
 
 class Post(models.Model):
@@ -33,7 +38,7 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Автор',
     )
-    
+
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
@@ -42,3 +47,34 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    """Комментарий к публикации."""
+
+    text = models.CharField(
+        max_length=5000,
+        verbose_name='Текст комментария'
+    )
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        verbose_name='Публикация'
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name='Автор комментария'
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментрарии'
+        ordering = ['-created_at']
+        default_related_name = 'comments'
+
+    def __str__(self) -> str:
+        return f'{self.author.username} - {self.text[:25]}'

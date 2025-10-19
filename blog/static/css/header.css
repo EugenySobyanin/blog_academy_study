@@ -23,3 +23,9 @@
     display: flex;
     gap: 5%;
 }
+
+.avatar-header {
+    border-radius: 50%;
+    height: 10%;
+    width: 10%;
+}
