@@ -106,7 +106,13 @@ def profile(request: HttpRequest, user_slug: Union[None, str] = None) -> HttpRes
 
 @login_required
 def comment_create(request: HttpRequest, ) -> HttpResponse:
-    pass
+    """Обработка формы добавления комментария."""
+    if request.method == 'Post':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save(author=request.user)
+            return redirect('posts:detail', form.instance.post.pk)
+        
 
 
 @login_required

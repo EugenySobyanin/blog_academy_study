@@ -1,20 +1,20 @@
 <header>
   <div class="main-header-div header-border background-black text-white">
 
+    <!--Блок с названием, аватаркой и юзернеймом-->
     <div class="title-div">
       <h2 class="text-white">БЛОГ</h2>
-
       {% if user.is_authenticated %}
         <a href="{% url 'posts:my_profile' %}">
           <img src="{{ user.avatar.url }}" class="avatar-header">
         </a>
-
         <a href="{% url 'posts:my_profile' %}">
           <span> {{ user.username }} </span>
         </a>
       {% endif %}
     </div>
 
+    <!--Блок с ссылками на: публикации, форму, вход/выход-->
     <nav class="header-nav">
       <ul class="header-ul">
 

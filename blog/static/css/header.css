@@ -10,7 +10,7 @@
 .title-div {
     display: flex;
     align-items: center;
-    gap: 5%;
+    gap: 3%;
     width: 50%;
 }
 
@@ -26,6 +26,7 @@
 
 .avatar-header {
     border-radius: 50%;
-    height: 10%;
-    width: 10%;
+    height: 8%;
+    width: 8%;
+    object-fit: cover;
 }

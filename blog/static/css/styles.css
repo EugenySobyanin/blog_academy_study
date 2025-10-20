@@ -64,14 +64,12 @@ small p {
     overflow: hidden;
 }
 
-.avatar-post {
-    border-radius: 50%;
-    height: 10%;
-    width: 10%;
+.post-buttons {
+    display: flex;
+    column-gap: 3%;
 }
 
-.avatar-comment {
-    border-radius: 50%;
-    height: 10%;
-    width: 10%;
+.edit-button, .delete-button {
+    padding: 2% 2% 2% 2%;
+    border-radius: 10px;
 }

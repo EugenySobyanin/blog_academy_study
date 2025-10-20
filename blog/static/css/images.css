@@ -1,0 +1,17 @@
+.avatar-post {
+    border-radius: 50%;
+    height: 10%;
+    width: 10%;
+}
+
+.avatar-comment {
+    border-radius: 50%;
+    height: 6%;
+    width: 6%;
+}
+
+.avatar-comment-form {
+    border-radius: 50%;
+    height: 8%;
+    width: 8%;
+}

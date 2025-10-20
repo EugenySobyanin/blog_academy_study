@@ -23,6 +23,10 @@
     background-color: #2a323b;
 }
 
+.background-color {
+    background-color: #7FC7FF;
+}
+
 
 /*Бордеры*/
 
@@ -32,4 +36,8 @@
 
 .card-border {
     border: 2px solid #546575;
+}
+
+.button-border {
+    border: 5px solid #546575;
 }

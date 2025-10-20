@@ -29,20 +29,17 @@
       <!--Текст комментария-->
       {% if post.text %}
         <p class="post-text">
-          {{ post.text|truncatewords:25 }}
-          {% if post.text|wordcount > 25 %}
-          <a href="{% url 'posts:detail' post_id=post.pk %}"> Читать полностью </a>
-          {% endif %}
+          {{ post.text }}
         </p>
       {% endif %}
 
       <!--Кнопки редактирования и удаления-->
       {% if user == post.author %}
         <div class="post-buttons">
-          <div class="edit-button">
+          <div class="edit-button background-gray">
             <a href="{% url 'posts:update' post_id=post.pk %}"> Редактировать </a>
           </div>
-          <div class="delete-button">
+          <div class="delete-button background-gray">
             <a href="{% url 'posts:update' post_id=post.pk %}"> Удалить </a>
           </div>
         </div>
@@ -61,24 +58,30 @@
         <!--Количество комментариев-->
         {% if post.comments.count > 0 %}
           <p> Комментарии: {{ post.comments.count }} </p>
+          <hr class="separator-main background-gray">
         {% endif %}
 
-        <hr>
-
         <!--Форма для добавления комментариев-->
-        <div>
-
-        </div>
+        {% if user.is_authenticated %}
+          <div>
+            <img src="{{ user.avatar.url }}" class="avatar-comment-form">
+            <form method="post">
+              {% csrf_token %}
+              {{ form }}
+              <input type="submit" value="Отправить">
+            </form>
+          </div>
+        {% endif %}
 
         <!--Комментраии-->
         <div>
           {% for comment in post.comments.all %}
-            <div>
-              <p>
+            <div class="comment-main-div">
+              <p class="comment-author-info">
                 <img src="{{comment.author.avatar.url }}" class="avatar-comment">
                 <span> {{ comment.author.username }} </span>
               </p>
-              <p>
+              <p class="comment-text">
                 {{ comment.text }}
               </p>
             </div>
