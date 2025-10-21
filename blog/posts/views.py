@@ -1,5 +1,6 @@
 from typing import Union
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Count, Prefetch
@@ -105,14 +106,21 @@ def profile(request: HttpRequest, user_slug: Union[None, str] = None) -> HttpRes
 
 
 @login_required
-def comment_create(request: HttpRequest, ) -> HttpResponse:
+def comment_create(request: HttpRequest, post_id: int) -> HttpResponse:
     """Обработка формы добавления комментария."""
-    if request.method == 'Post':
+    post = get_object_or_404(Post, pk=post_id)
+
+    if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            form.save(author=request.user)
-            return redirect('posts:detail', form.instance.post.pk)
-        
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+        return redirect('posts:detail', form.instance.post.pk)
+    
+    # А что если валлидация не пройдена?
+
 
 
 @login_required

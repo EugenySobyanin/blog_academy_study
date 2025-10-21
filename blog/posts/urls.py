@@ -12,9 +12,9 @@ urlpatterns = [
     path('<int:post_id>/update/', views.post_update, name='update'),
     path('<int:post_id>/delete/', views.post_delete, name='delete'),
     path('<int:post_id>/comments/add/',
-         views.comment_create, name='comment_create'),
+         views.comment_create, name='add_comment'),
     path('<int:post_id>/comments/<int:comment_id/delete/',
-         views.comment_delete, name='comment_delete'),
+         views.comment_delete, name='delete_comment'),
     path('profile/', views.profile, name='my_profile'),
     path('profile/<slug:user_slug>/', views.profile, name='profile'),
 ]
