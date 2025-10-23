@@ -1,5 +1,5 @@
 <header>
-  <div class="main-header-div header-border background-black text-white">
+  <div class="main-header-div">
 
     <!--Блок с названием, аватаркой и юзернеймом-->
     <div class="title-div">
@@ -21,7 +21,7 @@
 
         <li class="nav-item">
           <a class="nav-link 
-          {% if request.resolver_match.url_name == '' %} activel {% endif %}" 
+          {% if request.resolver_match.url_name == 'list' %} activel {% endif %}" 
           href="{% url 'posts:list' %}"> Публикации </a>
         </li>
 
@@ -33,7 +33,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'users:login'%}"> Выйти </a>
+            <a class="nav-link" href="{% url 'users:logout'%}"> Выйти </a>
           </li>
         {% else %}
           <li class="nav-item">

@@ -54,7 +54,7 @@ class Comment(models.Model):
 
     text = models.CharField(
         max_length=5000,
-        verbose_name='Текст комментария'
+        verbose_name='Текст комментария',
     )
     post = models.ForeignKey(
         Post,

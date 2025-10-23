@@ -14,11 +14,6 @@
 
 
 /*Фон*/
-
-.background-black {
-    background-color: #151719;
-}
-
 .background-gray {
     background-color: #2a323b;
 }
@@ -29,14 +24,9 @@
 
 
 /*Бордеры*/
-
-.header-border {
-    border: 1px solid #546575;
-}
-
-.card-border {
+/* .card-border {
     border: 2px solid #546575;
-}
+} */
 
 .button-border {
     border: 5px solid #546575;

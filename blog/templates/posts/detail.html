@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-  <div class="card main-font card-border background-black">
+  <div class="card">
 
       <!--Аватар и юзернейм-->
-      <div>
+      <div class="user-info">
         <a
           {% if user == post.author %} href="{% url 'posts:my_profile' %}"
           {% else %} href="{% url 'posts:profile' user_slug=post.author.slug %}"
@@ -36,10 +36,10 @@
       <!--Кнопки редактирования и удаления-->
       {% if user == post.author %}
         <div class="post-buttons">
-          <div class="edit-button background-gray">
+          <div class="edit-button">
             <a href="{% url 'posts:update' post_id=post.pk %}"> Редактировать </a>
           </div>
-          <div class="delete-button background-gray">
+          <div class="delete-button">
             <a href="{% url 'posts:update' post_id=post.pk %}"> Удалить </a>
           </div>
         </div>
@@ -54,7 +54,7 @@
         </p>
       </small>
 
-      <section>
+      <section class="comments-section">
         <!--Количество комментариев-->
         {% if post.comments.count > 0 %}
           <p> Комментарии: {{ post.comments.count }} </p>
@@ -63,7 +63,7 @@
 
         <!--Форма для добавления комментариев-->
         {% if user.is_authenticated %}
-          <div>
+          <div class="comment-form-div">
             <img src="{{ user.avatar.url }}" class="avatar-comment-form">
             <form method="post" action="{% url 'posts:add_comment' post_id=post.pk %}">
               {% csrf_token %}

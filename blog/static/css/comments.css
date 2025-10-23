@@ -1,3 +1,7 @@
+.comments-section {
+    color: var(--white);
+}
+
 .separator-main{
     border: none;
     height: 1px;
@@ -15,4 +19,26 @@
 
 .comment-text {
     font-size: 80%;
+}
+
+.comment-form-div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 10px;
+    flex-wrap: nowrap;
+    min-width: 0;
+    width: 100%; 
+}
+
+.comment-textarea {
+    box-sizing: border-box;
+    background-color: var(--dark-gray);
+    color: var(--white);
+    font-family: var(--font-family);
+    border-radius: var(--btn-border-radius);
+    flex: 1; /* Занимает все доступное пространство */
+    min-width: 0; /* Позволяет сжиматься */
+    padding: 10px; /* Фиксированные паддинги */
+    border: none;
 }
