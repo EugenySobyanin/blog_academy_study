@@ -35,7 +35,8 @@ body {
     padding: 3% 5% 1% 5%;
     font-family: var(--font-family);
     background-color: var(--black);
-    border: 1px solid var(--gray);   
+    border: 1px solid var(--gray);
+    /* box-sizing: border-box;    */
 }
 
 .card h3 {

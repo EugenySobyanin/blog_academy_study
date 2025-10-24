@@ -9,8 +9,7 @@
     --main-color-hover: rgba(168, 230, 207, 0.1);
     --main-color-active: rgba(168, 230, 207, 0.05);
     --main-color-shadow: #066b46;
-    /* --white: #e8eee8; */
-    --white: #c3c7c3;
+    --white: #e8eee8;
     --font-family: 'Fira Code', 'Consolas', monospace;
     --btn-border-radius: 7px;
 }

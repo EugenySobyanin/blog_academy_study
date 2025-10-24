@@ -6,6 +6,13 @@ from .models import Comment, Post
 class PostForm(forms.ModelForm):
     """Форма для создания публикаций."""
 
+    text = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'class': 'post-textarea',
+        }),
+        label="Текст публикации: ",
+    )
+
     class Meta:
         model = Post
         fields = ('title', 'text', 'image')

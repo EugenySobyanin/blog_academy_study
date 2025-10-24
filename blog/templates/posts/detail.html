@@ -40,7 +40,7 @@
             <a href="{% url 'posts:update' post_id=post.pk %}"> Редактировать </a>
           </div>
           <div class="delete-button">
-            <a href="{% url 'posts:update' post_id=post.pk %}"> Удалить </a>
+            <a href="{% url 'posts:delete' post_id=post.pk %}"> Удалить </a>
           </div>
         </div>
       {% endif %}

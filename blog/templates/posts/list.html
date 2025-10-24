@@ -3,7 +3,8 @@
   {% for post in page_obj %}
     <div class="card main-font">
 
-      <div>
+      <!--Аватар и юзернейм-->
+      <div class="user-info">
         <a
           {% if user == post.author %} href="{% url 'posts:my_profile' %}"
           {% else %} href="{% url 'posts:profile' user_slug=post.author.slug %}"
@@ -14,16 +15,19 @@
         </a>
       </div>
 
+      <!--Название публикации-->
       <h3 class="text-color">
         <a class="title-link" href="{% url 'posts:detail' post_id=post.pk %}">
           {{ post.title }}
         </a>
       </h3>
 
+      <!--Картинка-->
       {% if post.image %}
         <img src="{{ post.image.url }}" alt="{{ post.title }}" class="image-container">
       {% endif %}
 
+      <!--Текст публикации-->
       {% if post.text %}
         <p class="post-text">
           {{ post.text|truncatewords:25 }}
@@ -33,13 +37,14 @@
         </p>
       {% endif %}
 
+      <!--Количество комментариев-->
       {% if post.comments_count > 0 %}
         <a href="{% url 'posts:detail' post_id=post.pk %}">
           Комментарии: {{ post.comments_count }}
         </a>
       {% endif %}
 
-
+      <!--Кнопки редактирования/удаления-->
       {% if user == post.author %}
         <div class="post-buttons">
           <div class="edit-button">
@@ -60,6 +65,7 @@
       </small>
     </div>
   {% endfor %}
+
   <!-- Пагинация -->
   {% if is_paginated %}
   <nav aria-label="Page navigation">

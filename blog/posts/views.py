@@ -16,7 +16,7 @@ def post_list(request: HttpRequest) -> HttpResponse:
     """Получение списка всех публикаций."""
     posts = Post.objects.annotate(
         comments_count=Count('comments')
-    ).select_related('author')
+    ).select_related('author').order_by('-created_at')
     paginator = Paginator(posts, POSTS_PAGINATE_COUNT)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -85,7 +85,13 @@ def post_update(request: HttpRequest, post_id: int) -> HttpResponse:
 
 @login_required
 def post_delete(request: HttpRequest, post_id:int) -> HttpResponse:
-    return HttpResponse('Удаление поста.')
+     # Проверяем, что пользователь является автором поста
+    post = get_object_or_404(Post, pk=post_id)
+    if post.author != request.user:
+        return redirect(request.META.get('HTTP_REFERER', 'posts:list'))
+    
+    post.delete()
+    return redirect('posts:list')
 
 
 @login_required
