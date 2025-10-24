@@ -1,8 +1,7 @@
 .main-header-div {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 30%;
+    justify-content: space-around;
     height: 65px;
     font-size: 100%;
     font-family: var(--font-family);
