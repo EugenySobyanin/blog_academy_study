@@ -20,6 +20,7 @@
 }
 
 .post-textarea,
+.comment-textarea,
 input[type="text"] {
     resize: none;
     box-sizing: border-box;
@@ -36,6 +37,7 @@ input[type="text"] {
 }
 
 .post-textarea:focus,
+.comment-textarea:focus,
 input[type="text"]:focus {
     border: 1px solid var(--main-color);
 }
@@ -43,18 +45,6 @@ input[type="text"]:focus {
 .controls {
     box-sizing: border-box;
 }
-
-
-/* .form-btn-div {
-    height: 20%;
-} */
-
-/* .form-btn {
-    width: 30%;
-    height: 100%;
-} */
-
-
 
 input[type="submit"],
 button[type="submit"] {

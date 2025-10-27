@@ -23,12 +23,23 @@
 
 .comment-form-div {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
     column-gap: 10px;
     flex-wrap: nowrap;
     min-width: 0;
     width: 100%; 
+}
+
+.avatar-comment-form {
+}
+
+.comment-form {
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    flex-wrap: nowrap;
+    height: 100%;
 }
 
 .comment-textarea {
@@ -41,4 +52,9 @@
     min-width: 0; /* Позволяет сжиматься */
     padding: 10px; /* Фиксированные паддинги */
     border: none;
+    word-break: break-all;
+}
+
+.comment-submit {
+    max-height: 40px;
 }

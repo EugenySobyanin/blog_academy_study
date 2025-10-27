@@ -65,10 +65,10 @@
         {% if user.is_authenticated %}
           <div class="comment-form-div">
             <img src="{{ user.avatar.url }}" class="avatar-comment-form">
-            <form method="post" action="{% url 'posts:add_comment' post_id=post.pk %}">
+            <form method="post" class="comment-form" action="{% url 'posts:add_comment' post_id=post.pk %}">
               {% csrf_token %}
               {{ form }}
-              <input type="submit" value="Отправить">
+              <input class="comment-submit" type="submit" value="Отправить">
             </form>
           </div>
         {% endif %}
