@@ -78,7 +78,9 @@ small p {
 }
 
 .edit-button, .delete-button {
-    padding: 2% 2% 2% 2%;
+    margin-top: 4%;
+    font-size: 0.85rem;
+    padding: 3% 4% 3% 4%;
     background-color: var(--gray_2);
     border-radius: var(--btn-border-radius);
     color: var(--white);

@@ -39,7 +39,7 @@
 
       <!--Количество комментариев-->
       {% if post.comments_count > 0 %}
-        <a href="{% url 'posts:detail' post_id=post.pk %}">
+        <a href="{% url 'posts:detail' post_id=post.pk %}" class="comment-count">
           Комментарии: {{ post.comments_count }}
         </a>
       {% endif %}

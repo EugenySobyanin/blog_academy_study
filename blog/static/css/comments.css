@@ -58,3 +58,12 @@
 .comment-submit {
     max-height: 40px;
 }
+
+.comment-count {
+    color: var(--white);
+}
+
+.comment-count:hover {
+    color: var(--main-color);
+    text-shadow: 0 0 10px var(--main-color-shadow);
+}
